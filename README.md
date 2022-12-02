@@ -1,6 +1,16 @@
-# proj2
+# Project 2 README
+1. Names:
+- Wil Hoppin, James Yang
 
-# Requirements
+2. UNIs:
+- wwh2121, dy2471
+
+3. PostgreSQL account info:
+- psql -U dy2471 -h 34.75.94.195 -d proj1part2
+- id: dy2471, pw: 9989
+
+4. 
+
 The name and UNI of both teammates. If you changed teammates with respect to Project 1, please indicate whose Project 1 project you have expanded for Project 2 and who the TA mentor for the project was.
 The name of the PostgreSQL account where your database is on our server (i.e., specify which teammate's UNI we should use to identify the database for your team). This is the database on which we will base our grading.
 A thorough explanation of the three items above with which you expanded your project. Explain carefully your rationale behind your modifications to the schema and how these modifications fit within your overall project.
