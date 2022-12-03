@@ -15,7 +15,11 @@
 - The third expansion we made to our database was turning the address attibute in the Users table into a composite type instead of a VARCHAR type. This allowed us to standardize the way we store dates into a series of VARCHAR values: house_number, street_name, street_type, city, state, zip. Before, a user could enter anything they wanted to as a string which elevated the risk of missing certain data types or otherwise having an unusable address.
 
 5. Queries
-- Homepage search event -> When a user searches for an item on the home page, we first prioritize VARCHAR string matches in the titles, then conduct a full-text search on the item descriptions as follows:
+- Homepage search event -> When a user searches for an item on the home page, we first look for VARCHAR exact string matches in the titles, then conduct a full-text search on the item descriptions using the FREETEXT function. For demo purposes, we assume form.query is a text string extracted from the search bar, which is an HTML input field.
+    - SELECT *
+    - FROM Items
+    - WHERE UPPER(item_name) LIKE UPPER(form.query)
+    - OR FREETEXT (description, form.query)
 - New like event -> When a user likes an item, we add their user_id to the "liked_by" ARRAY attribute in the Items table. In the example below, we use the variables current_user and current_item for the user and item in question. An example value of current_user.user_id could be 10000000001 and an example value of current_item.item_id could be 10000000003.
     - UPDATE Items
     - SET liked_by = array_append(liked_by, current_user.user_id)
