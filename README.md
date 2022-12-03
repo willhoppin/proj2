@@ -16,10 +16,12 @@
 
 5. Queries
 - Homepage search event -> When a user searches for an item on the home page, we first prioritize VARCHAR string matches in the titles, then conduct a full-text search on the item descriptions as follows:
-- New like event -> When a user likes an item, we add their user_id to the "liked_by" ARRAY attribute in the Items table. In the example below, we use the variables current_user and current_item for the user and item in question.
+- New like event -> When a user likes an item, we add their user_id to the "liked_by" ARRAY attribute in the Items table. In the example below, we use the variables current_user and current_item for the user and item in question. An example value of current_user.user_id could be 10000000001 and an example value of current_item.item_id could be 10000000003.
     - UPDATE Items
     - SET liked_by = array_append(liked_by, current_user.user_id)
     - WHERE item_id = current_item.item_id
-- Adding an address to the user table when we do that -> what does this look like?
+- Create new user event -> When a user is created, we add their address as an ARRAY instead of one VARCHAR element. For the sake of this query, we assume the "form" variable is JSON data populated from an HTML form on the signup page.
+    - INSERT INTO Users (user_id, user_name, email, created_at, photo,address, venmo, favorite)
+    - VALUES (form.userid, form.username, form.email, date.today(), form.photo, array[form.house_number, form.street_name, form.street_type, form.city, form.state, form.zip], form.venmo, 0)
 
 
