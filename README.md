@@ -15,6 +15,11 @@
 - The third expansion we made to our database was turning the address attibute in the Users table into a composite type instead of a VARCHAR type. This allowed us to standardize the way we store dates into a series of VARCHAR values: house_number, street_name, street_type, city, state, zip. Before, a user could enter anything they wanted to as a string which elevated the risk of missing certain data types or otherwise having an unusable address.
 
 5. Queries
-- Text search
-- Like event -> adding a name to the likes array
+- Homepage search event -> When a user searches for an item on the home page, we first prioritize VARCHAR string matches in the titles, then conduct a full-text search on the item descriptions as follows:
+- New like event -> When a user likes an item, we add their user_id to the "liked_by" ARRAY attribute in the Items table. In the example below, we use the variables current_user and current_item for the user and item in question.
+    - UPDATE Items
+    - SET liked_by = array_append(liked_by, current_user.user_id)
+    - WHERE item_id = current_item.item_id
 - Adding an address to the user table when we do that -> what does this look like?
+
+
